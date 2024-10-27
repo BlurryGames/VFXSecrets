@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dfx8ixtwumhn7"]
+[gd_scene load_steps=24 format=3 uid="uid://dfx8ixtwumhn7"]
 
 [ext_resource type="Texture2D" uid="uid://4ua7pb5spwik" path="res://05Explosions/DesigningTheMainExplosion/puff_gradient.tres" id="1_lvb5d"]
 [ext_resource type="Texture2D" uid="uid://csg225q0tyt4v" path="res://05Explosions/DesigningTheMainExplosion/explosion_gradient.tres" id="1_otcr2"]
@@ -114,18 +114,241 @@ scale_max = 0.1
 scale_curve = SubResource("CurveTexture_ejmps")
 color_ramp = ExtResource("1_otcr2")
 
+[sub_resource type="Animation" id="Animation_kwllr"]
+resource_name = "explode"
+length = 3.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion/FireBallParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion/FireTrails/FireTrailParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.05, 0.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explosion/FireTrails/FireTrailParticles2D2:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15, 0.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Explosion/FireTrails/FireTrailParticles2D3:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.25, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Explosion/FireTrails/FireTrailParticles2D4:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Explosion/FireTrails/FireTrailParticles2D5:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.05, 0.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Explosion/FireBurstParticles2D:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Explosion/SparkleParticles2D:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Explosion")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_7lrdh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion/FireBallParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explosion/FireTrails/FireTrailParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explosion/FireTrails/FireTrailParticles2D2:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Explosion/FireTrails/FireTrailParticles2D3:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Explosion/FireTrails/FireTrailParticles2D4:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Explosion/FireTrails/FireTrailParticles2D5:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Explosion/FireBurstParticles2D:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Explosion/SparkleParticles2D:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b4jii"]
+_data = {
+"RESET": SubResource("Animation_7lrdh"),
+"explode": SubResource("Animation_kwllr")
+}
+
 [node name="DesigningTheMainExplosion" type="Node"]
 
-[node name="FireBallParticles2D" type="GPUParticles2D" parent="."]
+[node name="Explosion" type="Node2D" parent="."]
+position = Vector2(604, 300)
+
+[node name="FireBallParticles2D" type="GPUParticles2D" parent="Explosion"]
 process_material = SubResource("ParticleProcessMaterial_ks8nh")
 texture = ExtResource("1_lvb5d")
 lifetime = 0.5
 explosiveness = 0.3
 randomness = 1.0
 
-[node name="FireTrails" type="Node2D" parent="."]
+[node name="FireTrails" type="Node2D" parent="Explosion"]
 
-[node name="FireTrailParticles2D" type="GPUParticles2D" parent="FireTrails"]
+[node name="FireTrailParticles2D" type="GPUParticles2D" parent="Explosion/FireTrails"]
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_oe4ro")
 texture = ExtResource("3_ckfbu")
@@ -133,7 +356,7 @@ lifetime = 0.5
 randomness = 0.5
 trail_enabled = true
 
-[node name="FireTrailParticles2D2" type="GPUParticles2D" parent="FireTrails"]
+[node name="FireTrailParticles2D2" type="GPUParticles2D" parent="Explosion/FireTrails"]
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_oe4ro")
 texture = ExtResource("3_ckfbu")
@@ -141,7 +364,7 @@ lifetime = 0.5
 randomness = 0.5
 trail_enabled = true
 
-[node name="FireTrailParticles2D3" type="GPUParticles2D" parent="FireTrails"]
+[node name="FireTrailParticles2D3" type="GPUParticles2D" parent="Explosion/FireTrails"]
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_oe4ro")
 texture = ExtResource("3_ckfbu")
@@ -149,7 +372,7 @@ lifetime = 0.5
 randomness = 0.5
 trail_enabled = true
 
-[node name="FireTrailParticles2D4" type="GPUParticles2D" parent="FireTrails"]
+[node name="FireTrailParticles2D4" type="GPUParticles2D" parent="Explosion/FireTrails"]
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_oe4ro")
 texture = ExtResource("3_ckfbu")
@@ -157,7 +380,7 @@ lifetime = 0.5
 randomness = 0.5
 trail_enabled = true
 
-[node name="FireTrailParticles2D5" type="GPUParticles2D" parent="FireTrails"]
+[node name="FireTrailParticles2D5" type="GPUParticles2D" parent="Explosion/FireTrails"]
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_oe4ro")
 texture = ExtResource("3_ckfbu")
@@ -165,7 +388,7 @@ lifetime = 0.5
 randomness = 0.5
 trail_enabled = true
 
-[node name="FireBurstParticles2D" type="GPUParticles2D" parent="."]
+[node name="FireBurstParticles2D" type="GPUParticles2D" parent="Explosion"]
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_p7out")
 texture = ExtResource("1_lvb5d")
@@ -173,9 +396,16 @@ lifetime = 3.0
 preprocess = 0.6
 explosiveness = 0.6
 
-[node name="SparkleParticles2D" type="GPUParticles2D" parent="."]
+[node name="SparkleParticles2D" type="GPUParticles2D" parent="Explosion"]
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_63vhb")
 texture = ExtResource("4_ydfp0")
 explosiveness = 0.2
 randomness = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Explosion"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_b4jii")
+}
+autoplay = "explode"
