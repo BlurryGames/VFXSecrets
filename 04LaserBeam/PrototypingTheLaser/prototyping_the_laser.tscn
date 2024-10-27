@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1621j0enkoyk"]
+[gd_scene load_steps=13 format=3 uid="uid://d1621j0enkoyk"]
 
 [ext_resource type="Texture2D" uid="uid://ba05c1jejxt3f" path="res://04LaserBeam/PrototypingTheLaser/glowing_circle.tres" id="1_guv6t"]
 [ext_resource type="Script" path="res://04LaserBeam/PrototypingTheLaser/laser_beam.gd" id="1_wqo6m"]
@@ -7,6 +7,60 @@
 background_mode = 3
 glow_enabled = true
 glow_blend_mode = 0
+
+[sub_resource type="Gradient" id="Gradient_n001i"]
+offsets = PackedFloat32Array(0.75, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ereds"]
+gradient = SubResource("Gradient_n001i")
+
+[sub_resource type="Curve" id="Curve_u4yey"]
+_data = [Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e165s"]
+curve = SubResource("Curve_u4yey")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cdcne"]
+particle_flag_disable_z = true
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_e165s")
+color_ramp = SubResource("GradientTexture1D_ereds")
+
+[sub_resource type="Curve" id="Curve_08r3l"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_166gr"]
+curve = SubResource("Curve_08r3l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_feeqf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(60, 20, 1)
+initial_velocity_min = -100.0
+initial_velocity_max = -100.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -100.0
+tangential_accel_max = 100.0
+scale_min = 0.3
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_166gr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dywij"]
+particle_flag_disable_z = true
+initial_velocity_min = 16.0
+initial_velocity_max = 16.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_e165s")
+color_ramp = SubResource("GradientTexture1D_ereds")
 
 [node name="PrototypingTheLaser" type="Node"]
 
@@ -21,6 +75,7 @@ script = ExtResource("1_wqo6m")
 unique_name_in_owner = true
 modulate = Color(1.5, 1.5, 1.5, 1)
 points = PackedVector2Array(0, 0, 200, 0)
+width = 20.0
 default_color = Color(0, 0.424, 1, 1)
 joint_mode = 2
 begin_cap_mode = 2
@@ -28,12 +83,21 @@ end_cap_mode = 2
 
 [node name="CastingParticles2D" type="GPUParticles2D" parent="LaserBeam2D"]
 modulate = Color(1.5, 1.5, 1.5, 1)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_cdcne")
 texture = ExtResource("1_guv6t")
 
 [node name="BeamParticles2D" type="GPUParticles2D" parent="LaserBeam2D"]
 modulate = Color(1.5, 1.5, 1.5, 1)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_feeqf")
 texture = ExtResource("1_guv6t")
+preprocess = 1.0
+randomness = 1.0
+visibility_rect = Rect2(-2500, -2500, 5000, 5000)
 
 [node name="CollisionParticles2D" type="GPUParticles2D" parent="LaserBeam2D"]
 modulate = Color(1.5, 1.5, 1.5, 1)
+process_material = SubResource("ParticleProcessMaterial_dywij")
 texture = ExtResource("1_guv6t")
+lifetime = 0.3
