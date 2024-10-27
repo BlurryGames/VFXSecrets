@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://dfx8ixtwumhn7"]
+[gd_scene load_steps=21 format=3 uid="uid://dfx8ixtwumhn7"]
 
 [ext_resource type="Texture2D" uid="uid://4ua7pb5spwik" path="res://05Explosions/DesigningTheMainExplosion/puff_gradient.tres" id="1_lvb5d"]
 [ext_resource type="Texture2D" uid="uid://csg225q0tyt4v" path="res://05Explosions/DesigningTheMainExplosion/explosion_gradient.tres" id="1_otcr2"]
 [ext_resource type="Texture2D" uid="uid://bfffxni652y32" path="res://05Explosions/DesigningTheMainExplosion/puff_smooth.tres" id="3_ckfbu"]
+[ext_resource type="Texture2D" uid="uid://k2jpxripwjcu" path="res://05Explosions/DesigningTheMainExplosion/sparkle.tres" id="4_ydfp0"]
 
 [sub_resource type="Curve" id="Curve_5ahmc"]
 _data = [Vector2(0, 0), 0.0, 11.2088, 0, 0, Vector2(0.246667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -92,6 +93,27 @@ scale_max = 2.6
 scale_curve = SubResource("CurveTexture_skudl")
 color_ramp = SubResource("GradientTexture1D_noe1r")
 
+[sub_resource type="Curve" id="Curve_oic3a"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ejmps"]
+curve = SubResource("Curve_oic3a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_63vhb"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 140.0
+radial_accel_max = 200.0
+tangential_accel_min = 100.0
+tangential_accel_max = 100.0
+scale_min = 0.07
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_ejmps")
+color_ramp = ExtResource("1_otcr2")
+
 [node name="DesigningTheMainExplosion" type="Node"]
 
 [node name="FireBallParticles2D" type="GPUParticles2D" parent="."]
@@ -150,3 +172,10 @@ texture = ExtResource("1_lvb5d")
 lifetime = 3.0
 preprocess = 0.6
 explosiveness = 0.6
+
+[node name="SparkleParticles2D" type="GPUParticles2D" parent="."]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_63vhb")
+texture = ExtResource("4_ydfp0")
+explosiveness = 0.2
+randomness = 1.0
