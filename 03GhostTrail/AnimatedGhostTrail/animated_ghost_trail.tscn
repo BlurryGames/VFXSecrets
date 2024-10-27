@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://oqyu5sglvnkr"]
+
+[ext_resource type="Texture2D" uid="uid://d51h8c1nypl7" path="res://icon.svg" id="1_vvx1y"]
+[ext_resource type="Script" path="res://03GhostTrail/AnimatedGhostTrail/fading_sprite.gd" id="2_1kmdi"]
+
+[node name="AnimatedGhostTrail" type="Node"]
+
+[node name="FadingSprite" type="Sprite2D" parent="."]
+modulate = Color(0, 0.607843, 1, 0.490196)
+position = Vector2(569, 312)
+texture = ExtResource("1_vvx1y")
+script = ExtResource("2_1kmdi")
