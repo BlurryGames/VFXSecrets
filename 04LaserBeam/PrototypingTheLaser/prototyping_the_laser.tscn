@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://d1621j0enkoyk"]
+[gd_scene load_steps=15 format=3 uid="uid://d1621j0enkoyk"]
 
 [ext_resource type="Texture2D" uid="uid://ba05c1jejxt3f" path="res://04LaserBeam/PrototypingTheLaser/glowing_circle.tres" id="1_guv6t"]
 [ext_resource type="Script" path="res://04LaserBeam/PrototypingTheLaser/laser_beam.gd" id="1_wqo6m"]
+[ext_resource type="Texture2D" uid="uid://d51h8c1nypl7" path="res://icon.svg" id="3_1kw2l"]
 
 [sub_resource type="Environment" id="Environment_vypvj"]
 background_mode = 3
@@ -62,6 +63,9 @@ scale_max = 0.5
 scale_curve = SubResource("CurveTexture_e165s")
 color_ramp = SubResource("GradientTexture1D_ereds")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ilg3"]
+size = Vector2(123, 125)
+
 [node name="PrototypingTheLaser" type="Node"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -69,6 +73,7 @@ environment = SubResource("Environment_vypvj")
 
 [node name="LaserBeam2D" type="RayCast2D" parent="."]
 position = Vector2(50, 50)
+collide_with_areas = true
 script = ExtResource("1_wqo6m")
 
 [node name="FillLine2D" type="Line2D" parent="LaserBeam2D"]
@@ -82,13 +87,16 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="CastingParticles2D" type="GPUParticles2D" parent="LaserBeam2D"]
+unique_name_in_owner = true
 modulate = Color(1.5, 1.5, 1.5, 1)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_cdcne")
 texture = ExtResource("1_guv6t")
 
 [node name="BeamParticles2D" type="GPUParticles2D" parent="LaserBeam2D"]
+unique_name_in_owner = true
 modulate = Color(1.5, 1.5, 1.5, 1)
+emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_feeqf")
 texture = ExtResource("1_guv6t")
@@ -97,7 +105,19 @@ randomness = 1.0
 visibility_rect = Rect2(-2500, -2500, 5000, 5000)
 
 [node name="CollisionParticles2D" type="GPUParticles2D" parent="LaserBeam2D"]
+unique_name_in_owner = true
 modulate = Color(1.5, 1.5, 1.5, 1)
+emitting = false
 process_material = SubResource("ParticleProcessMaterial_dywij")
 texture = ExtResource("1_guv6t")
 lifetime = 0.3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(743, 67)
+texture = ExtResource("3_1kw2l")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_1ilg3")
