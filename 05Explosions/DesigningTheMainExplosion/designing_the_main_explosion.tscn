@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfx8ixtwumhn7"]
+[gd_scene load_steps=11 format=3 uid="uid://dfx8ixtwumhn7"]
 
 [ext_resource type="Texture2D" uid="uid://4ua7pb5spwik" path="res://05Explosions/DesigningTheMainExplosion/puff_gradient.tres" id="1_lvb5d"]
 [ext_resource type="Texture2D" uid="uid://csg225q0tyt4v" path="res://05Explosions/DesigningTheMainExplosion/explosion_gradient.tres" id="1_otcr2"]
@@ -25,6 +25,39 @@ scale_max = 2.0
 scale_curve = SubResource("CurveTexture_s6kac")
 color_ramp = ExtResource("1_otcr2")
 
+[sub_resource type="Gradient" id="Gradient_y0fsx"]
+offsets = PackedFloat32Array(0.15, 1)
+colors = PackedColorArray(0.306923, 0.306923, 0.306923, 1, 0.125911, 0.125911, 0.125911, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_noe1r"]
+gradient = SubResource("Gradient_y0fsx")
+
+[sub_resource type="Curve" id="Curve_glt1o"]
+_data = [Vector2(0, 0.505494), 0.0, 1.86335, 0, 0, Vector2(0.7, 0.912088), 0.0, 0.0, 0, 0, Vector2(1, 0.505494), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_skudl"]
+curve = SubResource("Curve_glt1o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p7out"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 40.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+spread = 180.0
+initial_velocity_min = 32.0
+initial_velocity_max = 80.0
+angular_velocity_min = 40.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+damping_min = 20.0
+damping_max = 40.0
+scale_min = 1.3
+scale_max = 2.6
+scale_curve = SubResource("CurveTexture_skudl")
+color_ramp = SubResource("GradientTexture1D_noe1r")
+
 [node name="DesigningTheMainExplosion" type="Node"]
 
 [node name="FireBallParticles2D" type="GPUParticles2D" parent="."]
@@ -33,3 +66,11 @@ texture = ExtResource("1_lvb5d")
 lifetime = 0.5
 explosiveness = 0.3
 randomness = 1.0
+
+[node name="FireBurstParticles2D" type="GPUParticles2D" parent="."]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_p7out")
+texture = ExtResource("1_lvb5d")
+lifetime = 3.0
+preprocess = 0.6
+explosiveness = 0.6
