@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1621j0enkoyk"]
+
+[ext_resource type="Texture2D" uid="uid://ba05c1jejxt3f" path="res://04LaserBeam/PrototypingTheLaser/glowing_circle.tres" id="1_guv6t"]
+[ext_resource type="Script" path="res://04LaserBeam/PrototypingTheLaser/laser_beam.gd" id="1_wqo6m"]
+
+[node name="PrototypingTheLaser" type="Node"]
+
+[node name="LaserBeam2D" type="RayCast2D" parent="."]
+script = ExtResource("1_wqo6m")
+
+[node name="FillLine2D" type="Line2D" parent="LaserBeam2D"]
+unique_name_in_owner = true
+points = PackedVector2Array(0, 0, 200, 0)
+
+[node name="CastingParticles2D" type="GPUParticles2D" parent="LaserBeam2D"]
+texture = ExtResource("1_guv6t")
+
+[node name="BeamParticles2D" type="GPUParticles2D" parent="LaserBeam2D"]
+texture = ExtResource("1_guv6t")
+
+[node name="CollisionParticles2D" type="GPUParticles2D" parent="LaserBeam2D"]
+texture = ExtResource("1_guv6t")
