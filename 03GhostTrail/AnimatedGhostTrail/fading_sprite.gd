@@ -10,5 +10,5 @@ func fade(duration: float = lifetime) -> void:
 	transparent.a = 0.0
 	
 	var tween: Tween = create_tween()
-	tween.tween_property(self, "modulate", transparent, duration)
+	tween.tween_property(self, ^"modulate", transparent, duration)
 	tween.finished.connect(queue_free.call_deferred)
