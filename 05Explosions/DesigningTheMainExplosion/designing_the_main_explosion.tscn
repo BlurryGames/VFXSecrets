@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfx8ixtwumhn7"]
+
+[ext_resource type="Texture2D" uid="uid://4ua7pb5spwik" path="res://05Explosions/DesigningTheMainExplosion/puff_gradient.tres" id="1_lvb5d"]
+[ext_resource type="Texture2D" uid="uid://csg225q0tyt4v" path="res://05Explosions/DesigningTheMainExplosion/explosion_gradient.tres" id="1_otcr2"]
+
+[sub_resource type="Curve" id="Curve_5ahmc"]
+_data = [Vector2(0, 0), 0.0, 11.2088, 0, 0, Vector2(0.246667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_s6kac"]
+curve = SubResource("Curve_5ahmc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ks8nh"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 220.0
+spread = 180.0
+initial_velocity_min = 175.0
+initial_velocity_max = 350.0
+gravity = Vector3(0, 0, 0)
+damping_min = 25.0
+damping_max = 100.0
+scale_min = 1.96
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_s6kac")
+color_ramp = ExtResource("1_otcr2")
+
+[node name="DesigningTheMainExplosion" type="Node"]
+
+[node name="FireBallParticles2D" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_ks8nh")
+texture = ExtResource("1_lvb5d")
+lifetime = 0.5
+explosiveness = 0.3
+randomness = 1.0
