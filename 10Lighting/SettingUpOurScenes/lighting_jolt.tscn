@@ -128,3 +128,6 @@ process_material = SubResource("ParticleProcessMaterial_qgqsm")
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+unique_name_in_owner = true

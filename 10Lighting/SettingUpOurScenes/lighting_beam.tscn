@@ -1,7 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://d03j5d1i1ukfi"]
+[gd_scene load_steps=3 format=3 uid="uid://d03j5d1i1ukfi"]
 
 [ext_resource type="Script" path="res://10Lighting/SettingUpOurScenes/lighting_beam.gd" id="1_3frn2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5g8xs"]
+radius = 128.0
 
 [node name="LightingBeam" type="RayCast2D"]
 target_position = Vector2(600, 0)
 script = ExtResource("1_3frn2")
+
+[node name="JumpArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpArea"]
+shape = SubResource("CircleShape2D_5g8xs")

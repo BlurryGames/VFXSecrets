@@ -6,10 +6,18 @@ class_name LightingJolt extends Line2D
 
 @onready var sparks: GPUParticles2D = %Sparks
 
+@onready var ray_cast: RayCast2D = %RayCast2D
+
 func _ready() -> void:
 	set_as_top_level(true)
 
 func create(start: Vector2, end: Vector2) -> void:
+	ray_cast.set_global_position(start)
+	ray_cast.set_target_position(end - start)
+	ray_cast.force_raycast_update()
+	if ray_cast.is_colliding():
+		end = ray_cast.get_collision_point()
+	
 	var _points: Array[Vector2] = []
 	var current: Vector2 = start
 	var segment_lenght: float = start.distance_to(end) / segments
