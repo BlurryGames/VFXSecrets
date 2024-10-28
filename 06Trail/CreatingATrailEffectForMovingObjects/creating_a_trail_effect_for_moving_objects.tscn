@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqxxyqd6avo6b"]
+
+[ext_resource type="Texture2D" uid="uid://d51h8c1nypl7" path="res://icon.svg" id="1_6o0nr"]
+[ext_resource type="Script" path="res://06Trail/CreatingATrailEffectForMovingObjects/trail_2d.gd" id="1_ncem8"]
+[ext_resource type="Script" path="res://06Trail/CreatingATrailEffectForMovingObjects/basic_mouse_follow.gd" id="2_3hsx5"]
+
+[sub_resource type="Curve" id="Curve_8q4ee"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 0, Vector2(1, 1), 1.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_iwrey"]
+colors = PackedColorArray(0, 0, 1, 0, 0, 0, 1, 1)
+
+[node name="CreatingATrailEffectForMovingObjects" type="Node"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(563, 311)
+texture = ExtResource("1_6o0nr")
+script = ExtResource("2_3hsx5")
+
+[node name="Trail2D" type="Line2D" parent="Sprite2D"]
+position = Vector2(0, 45)
+width = 50.0
+width_curve = SubResource("Curve_8q4ee")
+gradient = SubResource("Gradient_iwrey")
+script = ExtResource("1_ncem8")
