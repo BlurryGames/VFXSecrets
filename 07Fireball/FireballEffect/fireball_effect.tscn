@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=3 uid="uid://cqt2n6ovnyamq"]
+
+[ext_resource type="Texture2D" uid="uid://dkoh2msmk8pg6" path="res://07Fireball/FireballEffect/fireball_gradient.tres" id="1_0x2x2"]
+[ext_resource type="Texture2D" uid="uid://4ua7pb5spwik" path="res://05Explosions/DesigningTheMainExplosion/puff_gradient.tres" id="1_qjm4c"]
+[ext_resource type="Texture2D" uid="uid://dumpolocal7r5" path="res://07Fireball/FireballEffect/white_glowing_circle.tres" id="2_me4p7"]
+[ext_resource type="Texture2D" uid="uid://csg225q0tyt4v" path="res://05Explosions/DesigningTheMainExplosion/explosion_gradient.tres" id="4_incsx"]
+[ext_resource type="Texture2D" uid="uid://k2jpxripwjcu" path="res://05Explosions/DesigningTheMainExplosion/sparkle.tres" id="5_mtf41"]
+
+[sub_resource type="Curve" id="Curve_xs784"]
+_data = [Vector2(0.56, 1), 0.0, -2.65568, 0, 0, Vector2(1, 0.417582), -0.0323206, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vhlj3"]
+curve = SubResource("Curve_xs784")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i48rf"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_max = 120.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_vhlj3")
+color_ramp = ExtResource("1_0x2x2")
+
+[sub_resource type="Curve" id="Curve_4kpab"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ejmps"]
+curve = SubResource("Curve_4kpab")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qx4e4"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 30.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = -2.23517e-06
+scale_min = 0.07
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_ejmps")
+color_ramp = ExtResource("4_incsx")
+
+[node name="FireballEffect" type="Node"]
+
+[node name="CoreFlames" type="GPUParticles2D" parent="."]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_i48rf")
+texture = ExtResource("1_qjm4c")
+
+[node name="Glow" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_me4p7")
+
+[node name="SparkleParticles2D" type="GPUParticles2D" parent="."]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_qx4e4")
+texture = ExtResource("5_mtf41")
+explosiveness = 0.2
+randomness = 1.0
