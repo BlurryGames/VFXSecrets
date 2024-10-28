@@ -9,7 +9,14 @@ const LIGHTING_JOLT: PackedScene = preload("res://10Lighting/SettingUpOurScenes/
 var target_point := Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
-	pass
+	target_point = to_global(get_target_position())
+	if is_colliding():
+		target_point = get_collision_point()
 
 func shoot() -> void:
-	pass
+	for flash: int in flashes:
+		var jolt: LightingJolt = LIGHTING_JOLT.instantiate()
+		add_child(jolt)
+		jolt.create(get_global_position(), target_point)
+		
+		await get_tree().create_timer(flash_time).timeout
