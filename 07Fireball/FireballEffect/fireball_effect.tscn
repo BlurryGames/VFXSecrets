@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cqt2n6ovnyamq"]
+[gd_scene load_steps=22 format=3 uid="uid://cqt2n6ovnyamq"]
 
 [ext_resource type="Texture2D" uid="uid://dkoh2msmk8pg6" path="res://07Fireball/FireballEffect/fireball_gradient.tres" id="1_0x2x2"]
 [ext_resource type="Texture2D" uid="uid://4ua7pb5spwik" path="res://05Explosions/DesigningTheMainExplosion/puff_gradient.tres" id="1_qjm4c"]
@@ -6,6 +6,53 @@
 [ext_resource type="Texture2D" uid="uid://csg225q0tyt4v" path="res://05Explosions/DesigningTheMainExplosion/explosion_gradient.tres" id="4_incsx"]
 [ext_resource type="Texture2D" uid="uid://k2jpxripwjcu" path="res://05Explosions/DesigningTheMainExplosion/sparkle.tres" id="5_mtf41"]
 [ext_resource type="Texture2D" uid="uid://bfffxni652y32" path="res://05Explosions/DesigningTheMainExplosion/puff_smooth.tres" id="6_cdele"]
+
+[sub_resource type="Environment" id="Environment_wc6p1"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 0
+
+[sub_resource type="Curve" id="Curve_6157v"]
+_data = [Vector2(0, 1), 0.0, -0.736264, 0, 1, Vector2(1, 0.263736), -0.736264, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_oy0py"]
+curve = SubResource("Curve_6157v")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iphyr"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 5.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+angular_velocity_min = 140.0
+angular_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_oy0py")
+color_ramp = ExtResource("1_0x2x2")
+
+[sub_resource type="Curve" id="Curve_4kpab"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ejmps"]
+curve = SubResource("Curve_4kpab")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_70c1l"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 15.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = -2.23517e-06
+scale_min = 0.07
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_ejmps")
+color_ramp = ExtResource("4_incsx")
 
 [sub_resource type="Curve" id="Curve_xs784"]
 _data = [Vector2(0.56, 1), 0.0, -2.65568, 0, 0, Vector2(1, 0.417582), -0.0323206, 0.0, 0, 0]
@@ -31,13 +78,6 @@ scale_max = 0.3
 scale_curve = SubResource("CurveTexture_vhlj3")
 color_ramp = ExtResource("1_0x2x2")
 
-[sub_resource type="Curve" id="Curve_4kpab"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_ejmps"]
-curve = SubResource("Curve_4kpab")
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qx4e4"]
 particle_flag_disable_z = true
 emission_shape = 1
@@ -52,74 +92,346 @@ scale_max = 0.1
 scale_curve = SubResource("CurveTexture_ejmps")
 color_ramp = ExtResource("4_incsx")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_70c1l"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 15.0
-gravity = Vector3(0, 0, 0)
-radial_accel_min = -2.23517e-06
-radial_accel_max = -2.23517e-06
-tangential_accel_min = -2.23517e-06
-tangential_accel_max = -2.23517e-06
-scale_min = 0.07
-scale_max = 0.1
-scale_curve = SubResource("CurveTexture_ejmps")
-color_ramp = ExtResource("4_incsx")
+[sub_resource type="Animation" id="Animation_25oso"]
+resource_name = "ignite"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fireball/PointLight2D:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [0.01, 6.0, 5.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fireball/PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [0.0, 0.5, 0.3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fireball/Glow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(2, 2), Vector2(1.5, 1.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fireball:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1.2, 1.2, 1.2, 1), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Fireball/CoreFlames:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Fireball/SparkleParticles2D:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Fireball/TrailSparkles:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Fireball/FireTrail:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
-[sub_resource type="Curve" id="Curve_6157v"]
-_data = [Vector2(0, 1), 0.0, -0.736264, 0, 1, Vector2(1, 0.263736), -0.736264, 0.0, 1, 0]
-point_count = 2
+[sub_resource type="Animation" id="Animation_wekua"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fireball/PointLight2D:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fireball/PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fireball/Glow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fireball:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Fireball/CoreFlames:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Fireball/SparkleParticles2D:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Fireball/TrailSparkles:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Fireball/FireTrail:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
-[sub_resource type="CurveTexture" id="CurveTexture_oy0py"]
-curve = SubResource("Curve_6157v")
+[sub_resource type="Animation" id="Animation_ared6"]
+resource_name = "fade"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fireball/PointLight2D:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [5.0, 0.01]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fireball/PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.3, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fireball/Glow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(1e-05, 1e-05)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fireball/FireTrail:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Fireball/TrailSparkles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Fireball/CoreFlames:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Fireball/SparkleParticles2D:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iphyr"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 5.0
-angle_min = 1.07288e-05
-angle_max = 360.0
-angular_velocity_min = 140.0
-angular_velocity_max = 200.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.5
-scale_max = 0.5
-scale_curve = SubResource("CurveTexture_oy0py")
-color_ramp = ExtResource("1_0x2x2")
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8yxni"]
+_data = {
+"RESET": SubResource("Animation_wekua"),
+"fade": SubResource("Animation_ared6"),
+"ignite": SubResource("Animation_25oso")
+}
 
 [node name="FireballEffect" type="Node"]
 
-[node name="CoreFlames" type="GPUParticles2D" parent="."]
-amount = 32
-process_material = SubResource("ParticleProcessMaterial_i48rf")
-texture = ExtResource("1_qjm4c")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wc6p1")
 
-[node name="Glow" type="Sprite2D" parent="."]
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("2_me4p7")
+[node name="Fireball" type="Node2D" parent="."]
 
-[node name="SparkleParticles2D" type="GPUParticles2D" parent="."]
-amount = 32
-process_material = SubResource("ParticleProcessMaterial_qx4e4")
-texture = ExtResource("5_mtf41")
-explosiveness = 0.2
-randomness = 1.0
+[node name="FireTrail" type="GPUParticles2D" parent="Fireball"]
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_iphyr")
+texture = ExtResource("6_cdele")
+lifetime = 0.5
 
-[node name="TrailSparkles" type="GPUParticles2D" parent="."]
+[node name="TrailSparkles" type="GPUParticles2D" parent="Fireball"]
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_70c1l")
 texture = ExtResource("5_mtf41")
 explosiveness = 0.2
 randomness = 1.0
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="CoreFlames" type="GPUParticles2D" parent="Fireball"]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_i48rf")
+texture = ExtResource("1_qjm4c")
+
+[node name="SparkleParticles2D" type="GPUParticles2D" parent="Fireball"]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_qx4e4")
+texture = ExtResource("5_mtf41")
+explosiveness = 0.2
+randomness = 1.0
+
+[node name="PointLight2D" type="PointLight2D" parent="Fireball"]
 color = Color(1, 0.227451, 0.227451, 1)
 energy = 0.3
 texture = ExtResource("2_me4p7")
 texture_scale = 5.0
 
-[node name="FireTrail" type="GPUParticles2D" parent="."]
-amount = 64
-process_material = SubResource("ParticleProcessMaterial_iphyr")
-texture = ExtResource("6_cdele")
-lifetime = 0.5
+[node name="Glow" type="Sprite2D" parent="Fireball"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_me4p7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fireball"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_8yxni")
+}
+autoplay = "ignite"
